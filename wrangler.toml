@@ -1,0 +1,27 @@
+# Cloudflare Workers 部署配置（只读模式）
+#
+# 部署：
+#   npx wrangler deploy
+#
+# 原理：wrangler 会把 public/ 作为静态资源上传，worker/index.js 负责
+#   1) 用仓库里的 data/*.json 提供 /api/bootstrap 等读接口
+#   2) 其它请求回落到静态资源（前端是 hash 路由 SPA，统一回 index.html）
+#
+# ⚠️ 只读：Cloudflare 没有持久文件系统，「扩充」页的保存 / 增删改 / 上传一律不可用。
+#    这些接口会返回 501 并附带说明，前端会提示，不会静默失败。
+#    要编辑功能请继续用 Node 主机跑 server.mjs。
+
+name = "form-atlas"
+main = "worker/index.js"
+compatibility_date = "2026-08-04"
+
+# 静态资源：public/ 整个目录原样上传
+[assets]
+directory = "./public"
+# 让 Worker 先跑，接口由它处理，其余再落到静态资源
+binding = "ASSETS"
+# 前端用 hash 路由，深层路径也回 index.html
+not_found_handling = "single-page-application"
+
+[observability]
+enabled = true

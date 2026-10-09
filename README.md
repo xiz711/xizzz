@@ -161,6 +161,38 @@ node tools/deploy-github.mjs
 位置不持久化，**刷新页面即回到检索框上方**；只在**首页**出现；
 `prefers-reduced-motion: reduce` 下不漂流，点了也不动。
 
+### 部署到 Cloudflare（只读模式，免费）
+
+仓库里带了 `wrangler.toml` 与 `worker/index.js`，可以直接上 Cloudflare Workers：
+
+```bash
+# 需要 Node 18+ 与一次浏览器登录（npx wrangler login）
+npx wrangler deploy
+```
+
+Worker 负责两件事：用仓库里的 `data/*.json` 提供读接口（`/api/bootstrap`、`/api/styles`、
+`/api/taxonomy`、`/api/tags`），其余请求回落到 `public/` 里的静态资源。
+
+**能用的**：首页、分类、总览、标签、辨识、条目详情 —— 全部正常，且内容与仓库一致
+（不是退回 `seed.js` 的旧快照）。
+
+**不能用的**：「扩充」页保存、条目增删、文件夹增删改、上传图片。
+Cloudflare Workers **没有持久文件系统**，`node:fs` 在这些运行时上对写入是无效的 ——
+这是平台限制，不是配置问题。这些接口一律返回 **501** 并带说明，前端会提示，不会静默失败。
+
+> 想在 Cloudflare 上保留编辑功能，只有两条路：把 `data/*.json` 换成 **D1**
+> （并把写入接口改写成 SQL），或者继续用能跑 Node 的主机。前者改动不小，需要另外做。
+
+**免费额度对照**（本项目实测占用）：
+
+| | 本项目 | Cloudflare 免费额度 |
+| --- | --- | --- |
+| Worker 脚本 | data 128 KB + worker 5 KB | 3 MB |
+| 静态资源 | `public/` 0.5 MB | 20,000 文件 / 25 MiB 单文件 |
+| D1（仅当改用它） | 约 130 KB | 10 库 / 500 MB 每库 / 5 GB 账户 |
+
+---
+
 ### 总览里的增删
 
 `#/index` 的筛选行每一项都可增删：
