@@ -42,8 +42,32 @@ node tools/deploy-github.mjs
 
 > **这个站点不能直接挂 GitHub Pages。** 首页、检索、总览这些静态部分可以，
 > 但「扩充」页的保存、文件夹的新建/重命名/删除、条目增删都依赖 `server.mjs` 的 `/api/*`
-> —— Pages 只有静态托管，没有后端。想在公网用完整功能，需要一个能跑 Node 的主机
-> （Render / Railway / Fly.io / 自己的服务器都行），启动命令 `node server.mjs`，端口读 `PORT`。
+> —— Pages 只有静态托管，没有后端。
+
+### 部署成公网可访问的网址（Render）
+
+仓库里带了 `render.yaml`，用 Render 的 **Blueprint** 一键部署：
+
+1. 打开 <https://dashboard.render.com/blueprints> → **New Blueprint Instance**
+2. 选仓库 `xiz711/xizzz`（首次需要授权 Render 读取该仓库）
+3. Render 读到 `render.yaml` 后直接 **Apply** —— 服务名、构建与启动命令、环境变量都已写好
+4. 等 1–2 分钟，拿到形如 `https://form-atlas-xxxx.onrender.com` 的网址
+5. 之后每次 `git push` 到 `main`，Render 会自动重新部署
+
+**关键配置**（`render.yaml` 里已设好，这里说明原因）：
+
+| 项 | 值 | 为什么 |
+| --- | --- | --- |
+| `HOST` | `0.0.0.0` | `server.mjs` 默认只监听 `127.0.0.1`（本机自用）。容器托管必须监听所有网卡，否则健康检查连不上，服务会被判定启动失败 |
+| `PORT` | 由 Render 注入 | `server.mjs` 已经读 `process.env.PORT`，不用改代码 |
+| `buildCommand` | `npm install` | 项目零运行时依赖，这一步很快就过 |
+| `startCommand` | `npm start` | 即 `node server.mjs` |
+
+> ⚠️ **免费实例的文件系统是临时盘。** 重新部署或实例重启后，`data/` 与
+> `public/assets/uploads/` 会回到仓库里的版本 —— **在网页上做的增删改都会丢失**。
+> 想真正保存，需要给服务挂一个持久磁盘（Render 的 Disk 属付费功能，
+> Mount Path 填 `data`），或者按下面方式工作：
+> 本地「扩充」页编辑 → 导出 JSON → push 到仓库，线上以仓库为准。
 
 ---
 

@@ -96,7 +96,9 @@ async function main() {
   }
   console.log('');
 
-  // 2) 取当前分支顶点（空仓库时没有，退回 null 表示这是首个提交）
+  // 2) 取当前分支顶点。
+  //    空仓库时这一步会失败 —— GitHub 对空仓库的 ref 查询返回 404 或 409
+  //    （409 "Git Repository is empty."），两种都当作「还没有提交」。
   let parentSha = null;
   let baseTree = null;
   try {
@@ -104,9 +106,13 @@ async function main() {
     parentSha = ref.object.sha;
     const parent = await api('GET', `/repos/${REPO}/git/commits/${parentSha}`);
     baseTree = parent.tree.sha;
-    console.log(`基于现有提交 ${parentSha.slice(0, 7)}`);
-  } catch {
-    console.log('仓库还没有提交，将创建首个提交');
+    console.log(`基于现有提交 ${parentSha.slice(0, 7)}（不会删除已有文件）`);
+  } catch (err) {
+    if (/HTTP (404|409)/.test(err.message)) {
+      console.log('仓库还没有提交（空仓库）→ 将创建首个提交，不会覆盖任何东西');
+    } else {
+      throw err;
+    }
   }
 
   // 3) 组 tree / 建 commit / 移动引用
