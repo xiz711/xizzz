@@ -1,0 +1,32 @@
+[
+  {
+    "key": "modernism",
+    "nameZh": "现代主义",
+    "nameEn": "Modernism",
+    "desc": "20 世纪前中期的形式革命：以几何、功能与标准化取代装饰，把设计变成可批量生产、可传授的系统。这一组内部的分歧往往在于「网格是工具还是教义」。"
+  },
+  {
+    "key": "postmodern",
+    "nameZh": "后现代与反叛",
+    "nameEn": "Postmodernism & Revolt",
+    "desc": "对现代主义正统的一系列反动：戏仿、拼贴、符号、繁复与刻意的失序。每一支反抗的对象不同，识别时必须先问它反对什么。"
+  },
+  {
+    "key": "digital",
+    "nameZh": "数字时代美学",
+    "nameEn": "Digital-era Aesthetics",
+    "desc": "互联网、界面与消费电子催生的形式语言。这一组多数是网络亚文化或商业趋势，学术界定薄弱、命名不稳定，条目中已如实标注证据强度。"
+  },
+  {
+    "key": "heritage",
+    "nameZh": "东方与传统",
+    "nameEn": "Eastern & Traditional",
+    "desc": "东亚与近代装饰传统，以及它们在当代的转译。这一组最容易被简化成配色方案，因此更依赖对材料、工艺与礼制语境的判断。"
+  },
+  {
+    "key": "editorial",
+    "nameZh": "实验与表达",
+    "nameEn": "Experimental & Expressive",
+    "desc": "以手工痕迹、破坏秩序与批判姿态为核心的一类实践：从达达拼贴到网页粗野主义。它们通常不是完整体系，而是针对特定对象的策略。"
+  }
+]
