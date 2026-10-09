@@ -1,7 +1,7 @@
 /**
  * 自动生成，请勿手工编辑 —— 修改内容请改 data/styles.json 与 data/taxonomy.json，
  * 然后运行: node tools/build-seed.mjs
- * 生成时间: 2026-10-09T12:32:28.404Z
+ * 生成时间: 2026-10-09T14:47:59.419Z
  * 条目数: 28 / 类别数: 5
  */
 export const seedStyles = [

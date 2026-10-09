@@ -2535,14 +2535,16 @@ async function boot() {
     };
     if (!state.styles.length) throw new Error('empty');
   } catch {
-    // 接口不可用时退回脚本内置的初始内容（seed.js），页面仍可阅读
-    try {
-      const seed = await import('./seed.js');
-      state.styles = seed.seedStyles || [];
-      state.taxonomy = seed.seedTaxonomy || [];
-    } catch {
-      state.styles = [];
-      state.taxonomy = [];
+    // 接口不可用时退回内置的 seed 模块，页面仍可阅读（只读）。
+    // 两个候选路径都试：正常在 /assets/seed.js（与本文件同目录），
+    // 但若站点把 assets 放在别的前缀下，/seed.js 也能兜住。
+    for (const url of ['./seed.js', '../seed.js']) {
+      try {
+        const seed = await import(/* @vite-ignore */ url);
+        state.styles = seed.seedStyles || [];
+        state.taxonomy = seed.seedTaxonomy || [];
+        if (state.styles.length) break;
+      } catch { /* 换下一个候选 */ }
     }
   }
   if (!state.taxonomy.length) {
