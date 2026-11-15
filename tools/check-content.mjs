@@ -57,7 +57,7 @@ for (let i = 0; i < keys.length; i++) {
 }
 const single = [...tagMap.entries()].filter(([, v]) => v.length === 1);
 
-console.log('=== 艺术家作品案例分析 · 内容体检 ===');
+console.log('=== 数字媒体艺术案例 · 内容体检 ===');
 console.log(`条目 ${styles.length} 则 / 类别 ${taxonomy.length} 个 / 唯一标签 ${tagMap.size} 个`);
 console.log('分组:', taxonomy.map((g) => `${g.nameZh}(${styles.filter((s) => s.group === g.key).length})`).join(' '));
 console.log(`作品合计 ${styles.reduce((n, s) => n + (s.works || []).length, 0)} 件`);

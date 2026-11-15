@@ -1,4 +1,4 @@
-# 艺术家作品案例分析 · Artist Case Studies
+# 数字媒体艺术案例 · Art & Technology Case Studies
 
 个人艺术家案例分析库。目标不是收集好看的图，而是回答一个具体问题：**「我看到的那种感觉，出自谁的手，凭什么这么判断？」**
 
@@ -76,16 +76,16 @@ node tools/deploy-github.mjs
 
 | 类别 | 条目 | 说明 |
 | --- | --- | --- |
-| 印象与后印象 | 3 | 莫奈、塞尚、梵高 |
-| 现代主义与抽象 | 3 | 毕加索、康定斯基、蒙德里安 |
-| 象征与表现 | 3 | 克里姆特、蒙克、席勒 |
-| 超现实与梦境 | 3 | 达利、马格里特、弗里达·卡罗 |
-| 日本与东方 | 3 | 葛饰北斋、草间弥生、奈良美智 |
-| 当代与数字艺术 | 3 | 霍克尼、teamLab、Refik Anadol |
+| 互动装置与身体输入 | 3 | 雨屋（Random International）、Pulse Room、Microphones（Lozano-Hemmer） |
+| 沉浸式影像与声光场域 | 3 | teamLab 轨迹生命、Chris Milk 三件互动影像、真鍋大度与 Rhizomatiks |
+| 人工智能与生成代理 | 3 | Unsupervised（Refik Anadol）、Hivemind（清华 ISSID）、窥（Metaphor Lab） |
+| 公共空间与数据政治 | 2 | Frequency and Volume（Lozano-Hemmer）、How Not to Be Seen（Hito Steyerl） |
+| 生物与生态媒介 | 2 | GFP Bunny（Eduardo Kac）、Interactive Plant Growing（Sommerer & Mignonneau） |
+| 中国跨学科实验室 | 5 | 景观、衍异新序、有机元系列、MeshRare、可计算的世界截面（未来之阈展） |
 
-合计 **18 位艺术家 / 70 件代表作品 / 164 个标签**。
+合计 **18 个案例 / 48 件相关作品 / 134 个标签**。
 
-分类逻辑是按**艺术史脉络**分组（每个类别 3 位艺术家），同一件作品常跨类别，边界处的争论直接写进条目里。每则条目均标注「资料来源」（文献 / 展览 / 官网，注明用途）与「个人理解」（站主第一人称解读，可自行改写）。
+分类逻辑是按**媒介与议题**分组，同一件作品常跨类别，边界处的争论直接写进条目里。每则条目均标注「资料来源」（作品官网 / 美术馆馆藏页 / 展览档案 / 媒体报道，注明用途）与「个人理解」（站主第一人称解读，可自行改写）。
 
 ### 关于资料的判断
 

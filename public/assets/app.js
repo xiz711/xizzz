@@ -1,5 +1,5 @@
 /**
- * 艺术家作品案例分析 · 前端应用
+ * 数字媒体艺术案例 · 前端应用
  * 无框架单页应用：hash 路由 + 实时检索 + 标签反查 + 易混对照 + 内容扩充
  */
 import { motif, motifVariant } from './motif.js';
@@ -205,7 +205,7 @@ const motifCache = new Map();
 
 /**
  * 卡片与详情页的视觉占位策略：
- * 有授权实拍图就用图；没有则用 canvas 按该艺术家的视觉语汇生成母题。
+ * 有授权实拍图就用图；没有则用 canvas 按该作品的视觉语汇生成母题。
  * 每张缩略图渲染两幅母题：默认母题与一个变体，悬停时切换，形成「图像动态变化」。
  */
 function thumbHTML(style, opts = {}) {
@@ -726,7 +726,7 @@ function folderHTML(g, pos) {
   return `
   <article class="folder ${pos}" id="folder-${esc(g.key)}" data-folder="${esc(g.key)}"
     data-folder-role="${isCur ? 'cur' : 'side'}" ${isCur ? 'tabindex="0"' : 'aria-hidden="true"'}
-    aria-label="${esc(g.nameZh)} 文件夹，${n} 位艺术家">
+    aria-label="${esc(g.nameZh)} 文件夹，${n} 个案例">
     <span class="folder__tab" aria-hidden="true"></span>
     ${isCur
       ? `<button class="folder__del" type="button" data-folder-del="${esc(g.key)}"
@@ -752,7 +752,7 @@ function folderHTML(g, pos) {
             : `<h3 class="folder__zh">${esc(g.nameZh)}</h3>`}
           <!-- 名称下面不再显示英文：名称就是名称 -->
         </div>
-        <p class="folder__count tnum">${String(n).padStart(2, '0')} 位艺术家${isCur ? ' · 双击进入 →' : ''}</p>
+        <p class="folder__count tnum">${String(n).padStart(2, '0')} 个案例${isCur ? ' · 双击进入 →' : ''}</p>
       </footer>
     </div>
     <!-- 新建入口：bindDeck 会把它搬进当前文件夹卡片，靠绝对定位挂在卡片**外侧**的右下角 -->
@@ -766,7 +766,7 @@ function folderDeckHTML() {
   const above = groups[i - 1];
   const below = groups[i + 1];
   return `
-  <section class="deck" id="folderDeck" aria-label="艺术家类别文件夹">
+  <section class="deck" id="folderDeck" aria-label="案例类别文件夹">
     <div class="deck__stage" data-deck>
       ${above ? folderHTML(above, 'is-prev') : ''}
       ${folderHTML(groups[i], 'is-cur')}
@@ -839,7 +839,7 @@ async function deleteFolder(key) {
   const g = state.taxonomy.find((x) => x.key === key);
   if (!g) return;
   const owned = state.styles.filter((s) => s.group === key);
-  const tail = owned.length ? `，其中 ${owned.length} 位艺术家会移到「未分类」` : '';
+  const tail = owned.length ? `，其中 ${owned.length} 个案例会移到「未分类」` : '';
   if (!window.confirm(`删除文件夹「${g.nameZh}」？${tail}。\n\n此操作不可撤销。`)) return;
 
   try {
@@ -866,7 +866,7 @@ async function deleteFolder(key) {
     // 3) 当前指针落到合法范围内
     state.folder = Math.min(Math.max(state.folder, 0), Math.max(0, state.taxonomy.length - 1));
     render();
-    toast(`已删除「${g.nameZh}」${owned.length ? `，${owned.length} 位艺术家已移到「未分类」` : ''}`);
+    toast(`已删除「${g.nameZh}」${owned.length ? `，${owned.length} 个案例已移到「未分类」` : ''}`);
   } catch (err) {
     toast(err.message, true);
   }
@@ -1130,7 +1130,7 @@ function shortEra(era) {
 /** 错落栅格：两列一组，偶数列整体下移，避免模板化的等高卡片阵列 */
 function staggeredGrid(list) {
   if (!list.length) {
-    return `<div class="empty"><b>没有符合条件的艺术家</b>
+    return `<div class="empty"><b>没有符合条件的案例</b>
       <p>试试减少筛选条件，或到 <a href="#/editor" style="border-bottom:1px solid var(--line)">扩充</a> 里新增一条。</p></div>`;
   }
   const groups = [];
@@ -1157,9 +1157,9 @@ function sideSearchHTML() {
         <circle cx="6.8" cy="6.8" r="4.8" stroke="currentColor" stroke-width="1.4"/>
         <path d="M10.4 10.4 14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
       </svg>
-      <label for="q" class="visually-hidden">按关键词检索艺术家</label>
+      <label for="q" class="visually-hidden">按关键词检索案例</label>
       <input id="q" class="search__input" type="search" data-search-input autocomplete="off" spellcheck="false"
-        placeholder="搜索艺术家、作品或关键词" value="${esc(state.query)}">
+        placeholder="搜索案例、作品或关键词" value="${esc(state.query)}">
       <button class="search__clear" type="button" id="clearQuery" aria-label="清空检索" ${state.query ? '' : 'hidden'}>×</button>
     </div>
   </div>`;
@@ -1264,7 +1264,7 @@ function viewHome() {
 function resultListHTML(list) {
   if (!list.length) {
     return `<div class="empty"><b>没有匹配的条目</b>
-      <p>支持艺术家名、别名、视觉特征、关联人物、作品与标签。也可以到
+      <p>支持案例名、创作者、视觉特征、作品与标签。也可以到
       <a href="#/index" style="border-bottom:1px solid var(--line)">总览</a> 里按条件筛选。</p></div>`;
   }
   return `
@@ -1295,7 +1295,7 @@ function viewBrowse() {
     <div class="section__head">
       <div>
         <h2 class="section__title">按类别浏览</h2>
-        <p class="section__desc">按艺术史脉络分组，逐条列出该类别下的艺术家案例。点击进入条目，可看完整特征清单与识别依据。</p>
+        <p class="section__desc">按媒介与议题分组，逐条列出该类别下的作品案例。点击进入条目，可看完整特征清单与识别依据。</p>
       </div>
       <span class="section__count tnum">${state.styles.length} ENTRIES</span>
     </div>
@@ -1431,7 +1431,7 @@ function viewCompare() {
     if (!s) {
       return `<div class="duo__col duo__col--empty">
         <div class="empty" style="padding:3rem 0">
-          <b>未选择艺术家</b>
+          <b>未选择案例</b>
           <p>从上方或「常见对照」里挑一组，即可并排对比两者的识别依据。</p>
         </div>
       </div>`;
@@ -1478,14 +1478,14 @@ function viewCompare() {
     <div class="section__head">
       <div>
         <h2 class="section__title">易混辨识</h2>
-        <p class="section__desc">把两位艺术家并排放在一起，直接对比「识别依据」。这是知识库最有用的一页：多数误判发生在气质相近的艺术家之间。</p>
+        <p class="section__desc">把两个案例并排放在一起，直接对比「识别依据」。这是知识库最有用的一页：多数误认发生在手法相近的作品之间。</p>
       </div>
       <span class="section__count">SIDE BY SIDE</span>
     </div>
     <div class="compare__pick">
-      <div class="picker"><select data-compare="0" aria-label="左侧艺术家">${opts(a ? a.id : '')}</select></div>
+      <div class="picker"><select data-compare="0" aria-label="左侧案例">${opts(a ? a.id : '')}</select></div>
       <div class="compare__vs">versus</div>
-      <div class="picker"><select data-compare="1" aria-label="右侧艺术家">${opts(b ? b.id : '')}</select></div>
+      <div class="picker"><select data-compare="1" aria-label="右侧案例">${opts(b ? b.id : '')}</select></div>
     </div>
     ${suggestions.length ? `<div class="filters" style="margin-bottom:2rem">
       <span class="filters__label">常见对照</span>
@@ -1560,7 +1560,7 @@ function viewDetail(id) {
                <div class="figure__img"><div class="thumb__media" data-parallax>
                  <canvas data-motif="${esc(s.id)}" aria-label="${esc(s.nameZh)} 生成式母题示意图" role="img"></canvas>
                  <canvas data-motif-variant="${esc(s.id)}" aria-hidden="true"></canvas></div></div>
-               <figcaption><span>生成式母题示意（暂无授权实拍图）</span><span>依据该艺术家的视觉语汇生成 · 非历史作品</span></figcaption>
+               <figcaption><span>生成式母题示意（暂无授权实拍图）</span><span>依据该作品的视觉语汇生成 · 非历史作品</span></figcaption>
              </figure>`}
 
         <section class="block">
@@ -1569,7 +1569,7 @@ function viewDetail(id) {
         </section>
 
         <section class="block">
-          <div class="block__label"><b>02</b><h2>艺术家与脉络 <span>Background</span></h2></div>
+          <div class="block__label"><b>02</b><h2>作品与脉络 <span>Background</span></h2></div>
           <p class="prose">${esc(s.origin || '')}</p>
         </section>
 
@@ -1580,7 +1580,7 @@ function viewDetail(id) {
 
         <section class="block">
           <div class="block__label"><b>04</b><h2>识别依据 <span>How to Tell</span></h2></div>
-          <p style="font-size:.85rem;color:var(--ink-3);margin-bottom:.75rem">看到这些具体证据，就可以判定出自这位艺术家（或其工作室）之手；若只有氛围相似，不足为据。</p>
+          <p style="font-size:.85rem;color:var(--ink-3);margin-bottom:.75rem">看到这些具体证据，就可以判定出自这个案例（或其工作室）之手；若只有氛围相似，不足为据。</p>
           <ul class="checklist checklist--plain">${arr(s.identify).map((f, i) => `<li data-i="${String(i + 1).padStart(2, '0')}">${esc(f)}</li>`).join('')}</ul>
         </section>
 
@@ -1692,12 +1692,12 @@ function viewEditor(param) {
 
         <div class="field field--row">
           <div class="field">
-            <label for="f-nameZh">艺术家中文名 *</label>
-            <input type="text" id="f-nameZh" value="${esc(d.nameZh || '')}" required placeholder="例：克劳德·莫奈">
+            <label for="f-nameZh">案例中文名 *</label>
+            <input type="text" id="f-nameZh" value="${esc(d.nameZh || '')}" required placeholder="例：雨屋 Rain Room">
           </div>
           <div class="field">
             <label for="f-nameEn">外文 / 原文名称</label>
-            <input type="text" id="f-nameEn" value="${esc(d.nameEn || '')}" placeholder="例：Claude Monet">
+            <input type="text" id="f-nameEn" value="${esc(d.nameEn || '')}" placeholder="例：Rain Room">
           </div>
         </div>
 
@@ -1711,11 +1711,11 @@ function viewEditor(param) {
           </div>
           <div class="field">
             <label for="f-era">年代</label>
-            <input type="text" id="f-era" value="${esc(d.era || '')}" placeholder="例：1840–1926">
+            <input type="text" id="f-era" value="${esc(d.era || '')}" placeholder="例：2012 年首展">
           </div>
           <div class="field">
             <label for="f-region">地域</label>
-            <input type="text" id="f-region" value="${esc(d.region || '')}" placeholder="例：法国 · 巴黎 / 吉维尼">
+            <input type="text" id="f-region" value="${esc(d.region || '')}" placeholder="例：伦敦 · 巴比肯艺术中心">
           </div>
         </div>
 
@@ -1725,12 +1725,12 @@ function viewEditor(param) {
         </div>
 
         <div class="field">
-          <label for="f-summary">案例概述 * <span class="hint">90–150 字，讲清这位艺术家是谁、核心课题是什么</span></label>
+          <label for="f-summary">案例概述 * <span class="hint">90–150 字，讲清这个案例是谁、核心课题是什么</span></label>
           <textarea id="f-summary" rows="4" required>${esc(d.summary || '')}</textarea>
         </div>
 
         <div class="field">
-          <label for="f-origin">艺术家与脉络 <span class="hint">生平关键节点、师承、转折与语境</span></label>
+          <label for="f-origin">作品与脉络 <span class="hint">作品背景、创作者、技术路径与语境</span></label>
           <textarea id="f-origin" rows="4">${esc(d.origin || '')}</textarea>
         </div>
 
@@ -1780,7 +1780,7 @@ function viewEditor(param) {
         </div>
 
         <div class="field">
-          <label>代表图像 <span class="hint">拖入或点击上传；也可留空，系统会用该艺术家的视觉语汇生成图形母题</span></label>
+          <label>代表图像 <span class="hint">拖入或点击上传；也可留空，系统会用该作品的视觉语汇生成图形母题</span></label>
           <div class="drop" id="drop" tabindex="0" role="button" aria-label="上传代表图像">
             ${d.image ? `<img src="${esc(d.image.url)}" alt="当前图像预览" id="imgPreview">` : `<img alt="" id="imgPreview" hidden>`}
             <div id="dropHint">${d.image ? '点击或拖入以替换' : '点击选择图片，或把图片拖到这里'}</div>
@@ -1791,7 +1791,7 @@ function viewEditor(param) {
         <div class="field field--row">
           <div class="field">
             <label for="f-imgAuthor">图像作者</label>
-            <input type="text" id="f-imgAuthor" value="${esc(d.image?.author || '')}" placeholder="例：Herbert Bayer">
+            <input type="text" id="f-imgAuthor" value="${esc(d.image?.author || '')}" placeholder="例：Random International">
           </div>
           <div class="field">
             <label for="f-imgLicense">图像许可</label>
@@ -1864,7 +1864,7 @@ function viewEditor(param) {
             <div class="field field--row">
               <div class="field">
                 <label for="nc-zh">新类别名称</label>
-                <input type="text" id="nc-zh" placeholder="例：工艺美术运动">
+                <input type="text" id="nc-zh" placeholder="例：沉浸式装置">
               </div>
               <div class="field">
                 <label for="nc-en">英文名</label>
@@ -2270,20 +2270,20 @@ function render() {
 }
 
 function titleFor(route, id) {
-  const base = '艺术家作品案例分析 · Artist Case Studies';
+  const base = '数字媒体艺术案例 · Art & Technology Case Studies';
   if (route === 's' && id) {
     const s = state.styles.find((x) => x.id === decodeURIComponent(id));
-    if (s) return `${s.nameZh} · 艺术家作品案例分析`;
+    if (s) return `${s.nameZh} · 数字媒体艺术案例`;
   }
   const map = { browse: '分类', index: '总览', tags: '标签', compare: '易混辨识', editor: '扩充' };
-  return map[route] ? `${map[route]} · 艺术家作品案例分析` : base;
+  return map[route] ? `${map[route]} · 数字媒体艺术案例` : base;
 }
 
 function updateMasthead() {
   // 顶栏与页脚已移除，这里只保留标题的同步
   const n = state.styles.length;
   const el = document.querySelector('meta[name="description"]');
-  if (el) el.setAttribute('content', `个人艺术家案例分析库：${n} 位艺术家，含作品视觉特征、识别依据、代表作品、资料来源与个人理解。`);
+  if (el) el.setAttribute('content', `数字媒体艺术案例库：${n} 个案例，含作品视觉特征、识别依据、代表作品、资料来源与个人理解。`);
 }
 
 /** 滚动到视口后再淡入，给长页面一点节奏；由 IntersectionObserver 驱动，不参与 rAF */

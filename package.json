@@ -2,7 +2,7 @@
   "name": "form-atlas",
   "version": "1.0.0",
   "private": true,
-  "description": "艺术家作品案例分析 · 个人艺术家案例库（零依赖本地站点）",
+  "description": "数字媒体艺术案例 · 艺术与科技案例库（零依赖本地站点）",
   "type": "module",
   "engines": {
     "node": ">=18"

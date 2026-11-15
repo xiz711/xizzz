@@ -118,7 +118,7 @@ async function main() {
   // 3) 组 tree / 建 commit / 移动引用
   const newTree = await api('POST', `/repos/${REPO}/git/trees`, { tree, ...(baseTree ? { base_tree: baseTree } : {}) });
   const commit = await api('POST', `/repos/${REPO}/git/commits`, {
-    message: `改版：艺术家作品案例分析（artist-atlas）\n\n${files.length} 个文件，18 位艺术家案例条目，新增「资料来源」与「个人理解」板块。`,
+    message: `改版：数字媒体艺术案例（digital-media-art-cases）\n\n${files.length} 个文件，18 个数字媒体艺术 / 艺术与科技案例条目（雨屋、Pulse 系列、teamLab、Anadol、未来之阈等），含「资料来源」与「个人理解」板块。`,
     tree: newTree.sha,
     ...(parentSha ? { parents: [parentSha] } : {}),
   });

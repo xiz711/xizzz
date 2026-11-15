@@ -1,38 +1,38 @@
 [
   {
-    "key": "impressionism",
-    "nameZh": "印象与后印象",
-    "nameEn": "Impressionism & Post-Impressionism",
-    "desc": "十九世纪后半叶，巴黎的画家把「画什么」换成「怎么画」：光、色、笔触第一次成为主角。这一组的分歧在于：光是消解形体（莫奈），还是用色彩重新建构形体（塞尚、梵高）。"
+    "key": "interactive-bodies",
+    "nameZh": "互动装置与身体输入",
+    "nameEn": "Interactive Installations & Body Input",
+    "desc": "观众的身体就是作品的开关：雨为你停下一块干燥的圆，灯泡以你的心跳闪烁，麦克风归还陌生人的声音。这一组的共同点是——传感器代替了画笔，作品的最终形态由每一位在场者亲手（亲手的心、手的位置、嘴的声音）写就。"
   },
   {
-    "key": "modern-abstract",
-    "nameZh": "现代主义与抽象",
-    "nameEn": "Modernism & Abstraction",
-    "desc": "二十世纪初，立体主义拆解了观看，抽象主义干脆放弃了对象。这一组的共同前提是：绘画不再模仿世界，而是自建一套规则——无论是毕加索的多视点、康定斯基的音乐性，还是蒙德里安的网格。"
+    "key": "immersive-fields",
+    "nameZh": "沉浸式影像与声光场域",
+    "nameEn": "Immersive Audiovisual Fields",
+    "desc": "画框消失之后，作品变成观众置身其中的整个场域：teamLab 用光线轨迹追问「空间何为」，Chris Milk 用三幕影子剧场重述变形记，真鍋大度则把音乐现场变成实时生成的数据宇宙。媒介各异，目标一致——让观众不再是「看」作品，而是「在」作品之中。"
   },
   {
-    "key": "symbolism-expression",
-    "nameZh": "象征与表现",
-    "nameEn": "Symbolism & Expressionism",
-    "desc": "维也纳分离派与北欧表现主义：画面的任务不是记录外表，而是呈现心理与欲望的强度。克里姆特把欲望做成金色的装饰，蒙克把焦虑拉成尖叫的线条，席勒把身体扭成神经的裸线。"
+    "key": "ai-agency",
+    "nameZh": "人工智能与生成代理",
+    "nameEn": "AI & Generative Agency",
+    "desc": "机器学习进入美术馆之后的三种立场：Anadol 让 AI「梦见」MoMA 的收藏，清华团队把大模型的「思考过程」做成可感知的现场，Metaphor Lab 则训练出艺术家本人的风格代理与观众共创。作者是谁、训练数据从哪来、生成算不算创作——这一组把争议本身做成了作品。"
   },
   {
-    "key": "surrealism",
-    "nameZh": "超现实与梦境",
-    "nameEn": "Surrealism & the Dream",
-    "desc": "弗洛伊德之后的绘画：让潜意识登上画布。达利用偏执狂的方法精确描绘梦境，马格里特用冷静的日常并置制造悖论，弗里达则拒绝「超现实」标签——她说她画的不是梦，而是自己的现实。"
+    "key": "public-data",
+    "nameZh": "公共空间与数据政治",
+    "nameEn": "Public Space & Data Politics",
+    "desc": "把无线电频谱、影像监控系统这些隐形基础设施翻到台面上：Lozano-Hemmer 让观众的影子去「调频」整个城市的电磁波，Hito Steyerl 用一部讽刺教学片示范如何在全景监控时代隐身。媒介批判在这一组不是理论，而是可进入、可体验的装置。"
   },
   {
-    "key": "eastern-japan",
-    "nameZh": "日本与东方",
-    "nameEn": "Japan & the East",
-    "desc": "从浮世绘到日本当代：葛饰北斋的木刻曾重塑了整个欧洲现代绘画（印象派与新艺术运动都欠他一笔），一百年后，草间弥生与奈良美智把日本艺术重新送回世界舞台的中心。"
+    "key": "bio-ecology",
+    "nameZh": "生物与生态媒介",
+    "nameEn": "Bio & Ecological Media",
+    "desc": "当媒介不再是屏幕而是生命本身：一只真实的荧光兔引发了生物艺术最著名的伦理争论，一盆真实的绿植成了 1992 年最早的「自然界面」。这一组追问的不是技术能做什么，而是艺术有没有权利「制造」生命。"
   },
   {
-    "key": "contemporary-digital",
-    "nameZh": "当代与数字艺术",
-    "nameEn": "Contemporary & Digital Art",
-    "desc": "仍在进行中的两股力量：霍克尼延续绘画传统却拥抱 iPad 与摄影拼贴；teamLab 与 Refik Anadol 则把「作品」变成算法、数据与观众共同驱动的沉浸场域。媒介变了，观看的问题没变。"
+    "key": "china-labs",
+    "nameZh": "中国跨学科实验室",
+    "nameEn": "Chinese Interdisciplinary Labs",
+    "desc": "「未来之阈」首届实验艺术展（华中师范大学展区）呈现的中国高校实验室图谱：算法生成的数字家具、绳驱机械悬吊的泥土星球、有机液体与透明屏的「肉身计算」、以及探讨「可见不等于可解释」的光盒。艺术家个体的神话让位于实验室的协作方法论——这本身即是 AI 时代创作方式的物证。"
   }
 ]
