@@ -26,7 +26,7 @@ const TOKEN = process.env.GITHUB_TOKEN;
 const API = 'https://api.github.com';
 
 /** 绝不入库：截图/无头 profile 里有 Edge 的凭据文件，仓库也要保持干净 */
-const EXCLUDE_DIRS = new Set(['_shots', 'node_modules', '.git']);
+const EXCLUDE_DIRS = new Set(['_shots', 'node_modules', '.git', '.tools', '.workbuddy']);
 const EXCLUDE_FILES = new Set(['.DS_Store', 'Thumbs.db']);
 
 function walk(dir, base = '') {
@@ -118,7 +118,7 @@ async function main() {
   // 3) 组 tree / 建 commit / 移动引用
   const newTree = await api('POST', `/repos/${REPO}/git/trees`, { tree, ...(baseTree ? { base_tree: baseTree } : {}) });
   const commit = await api('POST', `/repos/${REPO}/git/commits`, {
-    message: `发布 形式风格图谱（form-atlas）\n\n${files.length} 个文件，含 29 则风格条目与本地内置依赖。`,
+    message: `改版：艺术家作品案例分析（artist-atlas）\n\n${files.length} 个文件，18 位艺术家案例条目，新增「资料来源」与「个人理解」板块。`,
     tree: newTree.sha,
     ...(parentSha ? { parents: [parentSha] } : {}),
   });

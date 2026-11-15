@@ -2,7 +2,7 @@
   "name": "form-atlas",
   "version": "1.0.0",
   "private": true,
-  "description": "形式风格图谱 · 个人形式风格知识库（零依赖本地站点）",
+  "description": "艺术家作品案例分析 · 个人艺术家案例库（零依赖本地站点）",
   "type": "module",
   "engines": {
     "node": ">=18"
@@ -12,6 +12,12 @@
     "dev": "node server.mjs",
     "build:seed": "node tools/build-seed.mjs",
     "merge": "node tools/merge-styles.mjs",
-    "check": "node tools/check-content.mjs"
+    "check": "node tools/check-content.mjs",
+    "test:d1": "node tools/test-d1-api.mjs",
+    "test:worker": "node tools/test-worker-routes.mjs",
+    "test": "node tools/test-d1-api.mjs && node tools/test-worker-routes.mjs",
+    "d1:schema": "wrangler d1 execute form-atlas --file=worker/schema.sql --remote",
+    "d1:seed": "node tools/migrate-to-d1.mjs --sql > worker/seed.sql && wrangler d1 execute form-atlas --file=worker/seed.sql --remote",
+    "deploy:cf": "wrangler deploy"
   }
 }

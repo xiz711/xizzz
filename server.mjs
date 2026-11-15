@@ -1,8 +1,8 @@
 /**
- * 形式风格图谱 · 本地数据服务
+ * 艺术家作品案例分析 · 本地数据服务
  * 零依赖。职责：
  *   1. 静态托管 public/
- *   2. 提供 JSON 读写 API，使站点内容可以持续扩充（新增/编辑/删除风格）
+ *   2. 提供 JSON 读写 API，使站点内容可以持续扩充（新增/编辑/删除艺术家条目）
  *   3. 接收图片上传，落盘到 public/assets/uploads/
  * 数据文件：data/styles.json、data/taxonomy.json
  */
@@ -258,7 +258,7 @@ async function handleApi(req, res, url, pathnameOverride) {
     if (method === 'GET' && !id) return json(res, 200, styles);
     if (method === 'GET' && id) {
       const found = styles.find((s) => s.id === id);
-      return found ? json(res, 200, found) : json(res, 404, { error: '未找到该风格' });
+      return found ? json(res, 200, found) : json(res, 404, { error: '未找到该艺术家' });
     }
 
     if (method === 'POST' && !id) {
@@ -288,7 +288,7 @@ async function handleApi(req, res, url, pathnameOverride) {
     if (method === 'PUT' && id) {
       const body = await readJsonBody(req);
       const i = styles.findIndex((s) => s.id === id);
-      if (i < 0) return json(res, 404, { error: '未找到该风格' });
+      if (i < 0) return json(res, 404, { error: '未找到该艺术家' });
       styles[i] = { ...styles[i], ...body, id, updatedAt: new Date().toISOString() };
       await writeData('styles', styles);
       return json(res, 200, styles[i]);
@@ -296,7 +296,7 @@ async function handleApi(req, res, url, pathnameOverride) {
 
     if (method === 'DELETE' && id) {
       const i = styles.findIndex((s) => s.id === id);
-      if (i < 0) return json(res, 404, { error: '未找到该风格' });
+      if (i < 0) return json(res, 404, { error: '未找到该艺术家' });
       const [removed] = styles.splice(i, 1);
       await writeData('styles', styles);
       // 顺手清理该条目上传的图片（仅限本站 uploads 目录）
@@ -382,5 +382,5 @@ process.on('unhandledRejection', (err) => console.error('[unhandledRejection]', 
 
 await fsp.mkdir(UPLOAD_DIR, { recursive: true }).catch(() => {});
 server.listen(PORT, HOST, () => {
-  console.log(`形式风格图谱已启动 → http://${HOST}:${PORT}`);
+  console.log(`艺术家作品案例分析已启动 → http://${HOST}:${PORT}`);
 });

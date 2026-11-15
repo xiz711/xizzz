@@ -1,26 +1,44 @@
-# Cloudflare Workers 部署配置（只读模式）
+# Cloudflare Workers + D1 部署配置（**可读可写**）
 #
-# 部署：
-#   npx wrangler deploy
+# 与早先那版「只读」不同：现在写接口都实现了，数据存在 D1，
+# 因此在 Cloudflare 上也能新增/修改/删除条目与文件夹。
 #
-# 原理：wrangler 会把 public/ 作为静态资源上传，worker/index.js 负责
-#   1) 用仓库里的 data/*.json 提供 /api/bootstrap 等读接口
-#   2) 其它请求回落到静态资源（前端是 hash 路由 SPA，统一回 index.html）
+# 首次部署步骤：
+#   1) 建库
+#        npx wrangler d1 create form-atlas
+#      把命令输出的 database_id 填到下面 database_id 那一行
+#   2) 建表
+#        npx wrangler d1 execute form-atlas --file=worker/schema.sql --remote
+#   3) 灌入现有内容
+#        node tools/migrate-to-d1.mjs --sql > worker/seed.sql
+#        npx wrangler d1 execute form-atlas --file=worker/seed.sql --remote
+#   4) 部署
+#        npx wrangler deploy
 #
-# ⚠️ 只读：Cloudflare 没有持久文件系统，「扩充」页的保存 / 增删改 / 上传一律不可用。
-#    这些接口会返回 501 并附带说明，前端会提示，不会静默失败。
-#    要编辑功能请继续用 Node 主机跑 server.mjs。
+# 可选：想支持上传图片，再建一个 R2 桶并取消 [[r2_buckets]] 的注释。
 
 name = "form-atlas"
 main = "worker/index.js"
 compatibility_date = "2026-08-04"
 
-# 静态资源：public/ 整个目录原样上传
+# ---- 数据：D1 ----
+[[d1_databases]]
+binding = "DB"                       # api.js 里用 env.DB
+database_name = "form-atlas"
+database_id = "在这里填入 wrangler d1 create 输出的 id"
+
+# ---- 图片上传（可选）：R2 ----
+# 不绑定也能正常用，只是 /api/upload 会返回 501 并说明原因。
+# 启用步骤：npx wrangler r2 bucket create form-atlas-uploads
+# 然后把下面三行的注释去掉。
+# [[r2_buckets]]
+# binding = "UPLOADS"                # api.js 里用 env.UPLOADS
+# bucket_name = "form-atlas-uploads"
+
+# ---- 静态资源：public/ 整个目录 ----
 [assets]
 directory = "./public"
-# 让 Worker 先跑，接口由它处理，其余再落到静态资源
 binding = "ASSETS"
-# 前端用 hash 路由，深层路径也回 index.html
 not_found_handling = "single-page-application"
 
 [observability]

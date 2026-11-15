@@ -1,32 +1,38 @@
 [
   {
-    "key": "modernism",
-    "nameZh": "现代主义",
-    "nameEn": "Modernism",
-    "desc": "20 世纪前中期的形式革命：以几何、功能与标准化取代装饰，把设计变成可批量生产、可传授的系统。这一组内部的分歧往往在于「网格是工具还是教义」。"
+    "key": "impressionism",
+    "nameZh": "印象与后印象",
+    "nameEn": "Impressionism & Post-Impressionism",
+    "desc": "十九世纪后半叶，巴黎的画家把「画什么」换成「怎么画」：光、色、笔触第一次成为主角。这一组的分歧在于：光是消解形体（莫奈），还是用色彩重新建构形体（塞尚、梵高）。"
   },
   {
-    "key": "postmodern",
-    "nameZh": "后现代与反叛",
-    "nameEn": "Postmodernism & Revolt",
-    "desc": "对现代主义正统的一系列反动：戏仿、拼贴、符号、繁复与刻意的失序。每一支反抗的对象不同，识别时必须先问它反对什么。"
+    "key": "modern-abstract",
+    "nameZh": "现代主义与抽象",
+    "nameEn": "Modernism & Abstraction",
+    "desc": "二十世纪初，立体主义拆解了观看，抽象主义干脆放弃了对象。这一组的共同前提是：绘画不再模仿世界，而是自建一套规则——无论是毕加索的多视点、康定斯基的音乐性，还是蒙德里安的网格。"
   },
   {
-    "key": "digital",
-    "nameZh": "数字时代美学",
-    "nameEn": "Digital-era Aesthetics",
-    "desc": "互联网、界面与消费电子催生的形式语言。这一组多数是网络亚文化或商业趋势，学术界定薄弱、命名不稳定，条目中已如实标注证据强度。"
+    "key": "symbolism-expression",
+    "nameZh": "象征与表现",
+    "nameEn": "Symbolism & Expressionism",
+    "desc": "维也纳分离派与北欧表现主义：画面的任务不是记录外表，而是呈现心理与欲望的强度。克里姆特把欲望做成金色的装饰，蒙克把焦虑拉成尖叫的线条，席勒把身体扭成神经的裸线。"
   },
   {
-    "key": "heritage",
-    "nameZh": "东方与传统",
-    "nameEn": "Eastern & Traditional",
-    "desc": "东亚与近代装饰传统，以及它们在当代的转译。这一组最容易被简化成配色方案，因此更依赖对材料、工艺与礼制语境的判断。"
+    "key": "surrealism",
+    "nameZh": "超现实与梦境",
+    "nameEn": "Surrealism & the Dream",
+    "desc": "弗洛伊德之后的绘画：让潜意识登上画布。达利用偏执狂的方法精确描绘梦境，马格里特用冷静的日常并置制造悖论，弗里达则拒绝「超现实」标签——她说她画的不是梦，而是自己的现实。"
   },
   {
-    "key": "editorial",
-    "nameZh": "实验与表达",
-    "nameEn": "Experimental & Expressive",
-    "desc": "以手工痕迹、破坏秩序与批判姿态为核心的一类实践：从达达拼贴到网页粗野主义。它们通常不是完整体系，而是针对特定对象的策略。"
+    "key": "eastern-japan",
+    "nameZh": "日本与东方",
+    "nameEn": "Japan & the East",
+    "desc": "从浮世绘到日本当代：葛饰北斋的木刻曾重塑了整个欧洲现代绘画（印象派与新艺术运动都欠他一笔），一百年后，草间弥生与奈良美智把日本艺术重新送回世界舞台的中心。"
+  },
+  {
+    "key": "contemporary-digital",
+    "nameZh": "当代与数字艺术",
+    "nameEn": "Contemporary & Digital Art",
+    "desc": "仍在进行中的两股力量：霍克尼延续绘画传统却拥抱 iPad 与摄影拼贴；teamLab 与 Refik Anadol 则把「作品」变成算法、数据与观众共同驱动的沉浸场域。媒介变了，观看的问题没变。"
   }
 ]

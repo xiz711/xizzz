@@ -17,8 +17,11 @@ $RepoRoot = Split-Path -Parent $PSScriptRoot
 $Git      = Join-Path $RepoRoot '.tools\MinGit\cmd\git.exe'
 $AskPass  = Join-Path $RepoRoot 'tools\askpass.mjs'
 $Remote   = 'https://github.com/xiz711/xizzz.git'
-$Branch   = 'main'
 $User     = 'xiz711'
+# 推送**当前分支**，不写死 main —— 在功能分支上开发时不会误推到 main。
+$Branch   = (& $Git -c http.sslBackend=openssl rev-parse --abbrev-ref HEAD 2>$null)
+$Branch   = if ($Branch) { $Branch.Trim() } else { 'main' }
+if ($Branch -eq 'HEAD') { $Branch = 'main' }
 
 Write-Host ""
 Write-Host "[1/6] 定位便携版 git 与 node" -ForegroundColor Cyan
